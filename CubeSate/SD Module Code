@@ -1,0 +1,55 @@
+class SD_Card_Module{
+private:
+const int chipSelect = 10;
+public:
+void store_data_DHT(char x, char y, char z, char L)
+{ String dataString_DHT = "";
+ dataString_DHT += String(x);
+ dataString_DHT += ".";
+ dataString_DHT += String(y);
+ dataString_DHT += ",";
+ dataString_DHT += String(z);
+ dataString_DHT += ".";
+ dataString_DHT += String(L);
+ File data_DHT = SD.open("data_DHT.txt", FILE_WRITE);
+ if (data_DHT) {
+ data_DHT.println(dataString_DHT);
+ data_DHT.close();
+ }
+ Serial.print("done:connected");
+}
+void store_data_BMP(long a, float b)
+{
+ String dataString_BMP = "";
+ dataString_BMP += String(a);
+ dataString_BMP += ",";
+ dataString_BMP += String(b);
+ File data_BMP = SD.open("data_BMP.txt", FILE_WRITE);
+ if (data_BMP) {
+ data_BMP.println(dataString_BMP);
+ data_BMP.close();
+ }
+ Serial.print("done:connected");
+}
+void store_data_MPU(float q, float w, float e, float r, float t, float u)
+{
+ String dataString_MPU = "";
+ dataString_MPU += String(q);
+ dataString_MPU += ",";
+ dataString_MPU += String(w);
+ dataString_MPU += ",";
+ dataString_MPU += String(e);
+ dataString_MPU += ",";
+ dataString_MPU += String(r);
+ dataString_MPU += ",";
+ dataString_MPU += String(t);
+ dataString_MPU += ",";
+ dataString_MPU += String(u);
+ File data_MPU = SD.open("data_MPU.txt", FILE_WRITE);
+ if (data_MPU) {
+ data_MPU.println(dataString_MPU);
+ data_MPU.close();
+ }
+ Serial.print("done:connected");
+}
+};

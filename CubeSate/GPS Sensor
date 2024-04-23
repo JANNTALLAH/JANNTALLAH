@@ -1,0 +1,61 @@
+class GPS_Sensor{
+ private:
+char MID[6];
+char UTC[11];
+char LAT[10];
+char NSIND[2];
+char LONG[11];
+char EWIND[2];
+char POSFIX[2];
+char SAT[3];
+char ALTITUDE[7];
+public:
+void Run(){
+ if (Serial.available())
+ {
+ if (Serial.read() == '$')
+{
+Serial.readBytesUntil(',' , MID, 6);
+MID[5] = '\0';
+if (MID[2] == 'G' && MID[3] == 'G' && MID[4] == 'A')
+{
+ Serial.readBytesUntil(',' , UTC, 11);
+ Serial.readBytesUntil(',' , LAT, 10);
+ Serial.readBytesUntil(',' , NSIND, 2);
+ Serial.readBytesUntil(',' , LONG, 11);
+ Serial.readBytesUntil(',' , EWIND, 2);
+ Serial.readBytesUntil(',' , POSFIX, 2);
+ Serial.readBytesUntil(',' , SAT, 3);
+ Serial.readBytesUntil(',' , ALTITUDE, 3);
+ Serial.readBytesUntil(',' , ALTITUDE, 7);
+UTC[10]='\0';
+LAT[9]='\0';
+NSIND[1]='\0';
+LONG[10]='\0';
+EWIND[1]='\0';
+POSFIX[1]='\0';
+SAT[2]='\0';
+ALTITUDE[6]='\0';
+Serial.print("ID: ");
+Serial.println(MID);
+Serial.print("UTC: ");
+Serial.println(UTC);
+Serial.print("Latitude: ");
+Serial.println(LAT);
+Serial.print("NS: ");
+Serial.println(NSIND);
+Serial.print("Longitude: ");
+Serial.println(LONG);
+Serial.print("EW: ");
+Serial.println(EWIND);
+Serial.print("Position Fix: ");
+Serial.println(POSFIX);
+Serial.print("Satellite ");
+Serial.println(SAT);
+Serial.print("Altitude: ");
+Serial.println(ALTITUDE);
+}
+}
+}
+ }
+};

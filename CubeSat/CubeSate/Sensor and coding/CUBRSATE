@@ -1,0 +1,58 @@
+#include <Wire.h>
+//SD_Card //NOTE CS PIN IS CONNECTED TO DIGITAL PIN 10 IN ARDUINO
+#include <SPI.h>
+#include <SD.h>
+#include <SD_Card_Module.h>
+SD_Card_Module sd;
+//BMP 
+#include <BMP180_Sensor.h>
+BMP180_Sensor bmp;
+//DHT // NOTE THE DATA PIN IS CONNECTED TO PIN NUMBER 2 IN ARDUINO
+#include <DHT11_Sensor.h>
+DHT11_Sensor dht;
+//MPU 
+#include <MPU6050_Sensor.h>
+MPU6050_Sensor mpu;
+//GPS
+#include <GPS_Sensor.h>
+GPS_Sensor gps;
+void setup() {
+ // put your setup code here, to run once:
+ Serial.begin(9600);
+ Wire.begin();
+ Serial.print('*');
+ 
+ //BMP 
+ bmp.GET_DATA_FROM_REGISTERS();
+ //MPU6050
+ mpu.start_communication();
+ //GPS
+ gps.Run();
+}
+void loop() {
+ 
+//DHT 
+dht.calculate_parameters();// This function prints the following 
+("DHT:RH,TEMP")
+Serial.print(';');
+Serial.print("\n");
+sd.store_data_DHT(dht.RH_int,dht.RH_dec,dht.Temp_int,dht.Temp_dec);// This 
+function prints ("done")
+Serial.print("\n");
+//BMP
+bmp.calculate_parameters();// This function prints the following 
+("BMP:Pressure in pascal,Altitude")
+Serial.print(';');
+Serial.print("\n");
+sd.store_data_BMP(bmp.P,bmp.A);// This function prints ("done")
+Serial.print("\n");
+//MPU
+mpu.calculate_parameters();// This function prints the following 
+("MPU:AccX,AccY,AccZ,gyroAngleX,gyroAngleY,gyroAngleZ")
+Serial.print(';');
+Serial.print("\n");
+sd.store_data_MPU(mpu.AccX,mpu.AccY,mpu.AccY,mpu.gyroAngleX,mpu.gyroAngleY,
+mpu.gyroAngleZ);// This function prints ("done")
+Serial.print("\n");
+}
+

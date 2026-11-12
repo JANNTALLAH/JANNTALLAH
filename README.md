@@ -1,6 +1,4 @@
 ## Hi there 👋
-
-**JANNTALLAH/JANNTALLAH** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 I am a graduate of the Space Navigation program at the Faculty of Navigation Science and Space Technology, Beni-Suef University, Egypt. 
 My five-year undergraduate program provided me with a multidisciplinary foundation in space technology, covering: Orbit Mechanics - 
 Spacecraft Attitude Dynamics and Control- Flight Dynamics and Control of Space Vehicle - Space Mission Analysis - Navigation and Guidance Systems
